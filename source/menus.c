@@ -4,12 +4,14 @@
 #include "power.h"
 #include "utils.h"
 
-#define MAIN_MAX_ITEMS     11
+#define MAIN_MAX_ITEMS     12
 #define BATTERY_MAX_ITEMS  4
 #define FPS_MAX_ITEMS      2
+#define SCREEN_FILTER_MAX_ITEMS 2
 #define ADVANCED_MAX_ITEMS 3
 #define REFRESH_MAX_ITEMS  6
 #define COLOUR_MAX_ITEMS   9
+#define CONFIRM_MAX_ITEMS  2
 
 static SceInt app_list = 0;
 SceInt selection = 0;
@@ -43,12 +45,13 @@ static SceVoid Menu_DisplayMainMenu(SceVoid)
 	drawStringCenter(178, "BATTERY OPTIONS ->");
 	drawStringCenter(194, "ADVANCED MENU ->");
 	drawStringCenter(210, "FPS SETTINGS ->");
-	drawStringCenter(226, "LOAD PROGRAM ->");
-	drawStringCenter(242, "SHUTDOWN DEVICE");
+	drawStringCenter(226, "SCREEN FILTER ->");
+	drawStringCenter(242, "LOAD PROGRAM ->");
 	drawStringCenter(258, "SUSPEND DEVICE");
-	drawStringCenter(274, "REBOOT DEVICE");
-	drawStringCenter(290, "RESTART VSH");
-	drawStringCenter(306, "EXIT");
+	drawStringCenter(274, "SHUTDOWN DEVICE");
+	drawStringCenter(290, "REBOOT DEVICE");
+	drawStringCenter(306, "RESTART VSH");
+	drawStringCenter(322, "EXIT");
 		
 	switch(selection)
 	{
@@ -84,11 +87,11 @@ static SceVoid Menu_DisplayMainMenu(SceVoid)
 			break;
 		case 6:
 			drawSetColour(Menu_Config.colour == 9? Custom_Colour.text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.cursor_col : SKYBLUE);
-			drawStringCenter(226, "LOAD PROGRAM ->");
+			drawStringCenter(226, "SCREEN FILTER ->");
 			break;
 		case 7:
 			drawSetColour(Menu_Config.colour == 9? Custom_Colour.text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.cursor_col : SKYBLUE);
-			drawStringCenter(242, "SHUTDOWN DEVICE");
+			drawStringCenter(242, "LOAD PROGRAM ->");
 			break;
 		case 8:
 			drawSetColour(Menu_Config.colour == 9? Custom_Colour.text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.cursor_col : SKYBLUE);
@@ -96,15 +99,19 @@ static SceVoid Menu_DisplayMainMenu(SceVoid)
 			break;
 		case 9:
 			drawSetColour(Menu_Config.colour == 9? Custom_Colour.text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.cursor_col : SKYBLUE);
-			drawStringCenter(274, "REBOOT DEVICE");
+			drawStringCenter(274, "SHUTDOWN DEVICE");
 			break;
 		case 10:
 			drawSetColour(Menu_Config.colour == 9? Custom_Colour.text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.cursor_col : SKYBLUE);
-			drawStringCenter(290, "RESTART VSH");
+			drawStringCenter(290, "REBOOT DEVICE");
 			break;
 		case 11:
 			drawSetColour(Menu_Config.colour == 9? Custom_Colour.text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.cursor_col : SKYBLUE);
-			drawStringCenter(306, "EXIT");
+			drawStringCenter(306, "RESTART VSH");
+			break;
+		case 12:
+			drawSetColour(Menu_Config.colour == 9? Custom_Colour.text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.cursor_col : SKYBLUE);
+			drawStringCenter(322, "EXIT");
 			break;
 	}
 }
@@ -208,6 +215,34 @@ static SceVoid Menu_DisplayFPSMenu(SceVoid)
 	}
 }
 
+static SceVoid Menu_DisplayScreenFilterMenu(SceVoid)
+{
+	drawSetColour(Menu_Config.colour == 9? Custom_Colour.title_text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.title_bg_col : RGB_GREEN);
+	drawStringCenter(100, "SCREEN FILTER SETTINGS");
+		
+	drawSetColour(Menu_Config.colour == 9? Custom_Colour.text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.bg_col : Config_GetVSHColour());
+		
+	drawStringCenter(130, "<- BACK");
+	drawStringfCenter(162, "SCREEN FILTER %s", Menu_Config.screen_filter_keep_enabled? "enabled" : "disabled");
+	drawStringfCenter(178, "SCREEN FILTER TRANSPARENCY %d", Menu_Config.screen_filter_transparency);
+
+	switch(selection)
+	{
+		case 0:
+			drawSetColour(Menu_Config.colour == 9? Custom_Colour.text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.cursor_col : SKYBLUE);
+			drawStringCenter(130, "<- BACK");
+			break;
+		case 1:
+			drawSetColour(Menu_Config.colour == 9? Custom_Colour.text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.cursor_col : SKYBLUE);
+			drawStringfCenter(162, "SCREEN FILTER %s", Menu_Config.screen_filter_keep_enabled? "enabled" : "disabled");
+			break;
+		case 2:
+			drawSetColour(Menu_Config.colour == 9? Custom_Colour.text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.cursor_col : SKYBLUE);
+			drawStringfCenter(178, "SCREEN FILTER TRANSPARENCY %d", Menu_Config.screen_filter_transparency);
+			break;
+	}
+}
+
 static SceVoid Menu_DisplayProgramMenu(SceVoid)
 {
 	drawSetColour(Menu_Config.colour == 9? Custom_Colour.title_text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.title_bg_col : RGB_GREEN);
@@ -270,6 +305,29 @@ static SceVoid Menu_DisplayProgramMenu(SceVoid)
 	}
 }
 
+static SceVoid Menu_DisplayConfirmMenu(SceVoid)
+{
+	drawSetColour(Menu_Config.colour == 9? Custom_Colour.title_text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.title_bg_col : RGB_GREEN);
+	drawStringCenter(100, "YOU SURE?");
+		
+	drawSetColour(Menu_Config.colour == 9? Custom_Colour.text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.bg_col : Config_GetVSHColour());
+		
+	drawStringCenter(130, "CANCLE");
+	drawStringfCenter(162, "PROCEED");
+
+	switch(selection)
+	{
+		case 0:
+			drawSetColour(Menu_Config.colour == 9? Custom_Colour.text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.cursor_col : SKYBLUE);
+			drawStringCenter(130, "CANCLE");
+			break;
+		case 1:
+			drawSetColour(Menu_Config.colour == 9? Custom_Colour.text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.cursor_col : SKYBLUE);
+			drawStringfCenter(162, "PROCEED");
+			break;
+	}
+}
+
 SceVoid Menu_Display(SceVoid)
 {
 	switch(showVSH)
@@ -288,6 +346,12 @@ SceVoid Menu_Display(SceVoid)
 			break;
 		case VSH_PROGRAM_MENU:
 			Menu_DisplayProgramMenu();
+			break;
+		case VSH_SCREEN_FILTER_MENU:
+			Menu_DisplayScreenFilterMenu();
+			break;
+		case VSH_CONFIRM_MENU:
+			Menu_DisplayConfirmMenu();
 			break;
 	}
 }
@@ -401,17 +465,36 @@ SceInt Menu_HandleControls(SceUInt32 pad)
 		else if ((selection == 6) && (pad & SCE_CTRL_CROSS))
 		{
 			selection = 0;
-			showVSH = VSH_PROGRAM_MENU;
+			showVSH = VSH_SCREEN_FILTER_MENU;
 		}
 		else if ((selection == 7) && (pad & SCE_CTRL_CROSS)) 
-			scePowerRequestStandby();
-		else if ((selection == 8) && (pad & SCE_CTRL_CROSS)) 
+		{
+			selection = 0;
+			showVSH = VSH_PROGRAM_MENU;
+		}
+		else if ((selection == 8) && (pad & SCE_CTRL_CROSS))
+		{
 			scePowerRequestSuspend();
-		else if ((selection == 9) && (pad & SCE_CTRL_CROSS)) 
-			scePowerRequestColdReset();
+		}
+		else if ((selection == 9) && (pad & SCE_CTRL_CROSS))
+		{
+			selection = 0;
+			assignOperation = VSH_POWER_REQUEST_STANDBY;
+			showVSH = VSH_CONFIRM_MENU;
+		}
 		else if ((selection == 10) && (pad & SCE_CTRL_CROSS))
-			Utils_RestartVSH();
-		else if (((selection == 11) && (pad & SCE_CTRL_CROSS)) || (pad & SCE_CTRL_CIRCLE))
+		{
+			selection = 0;
+			assignOperation = VSH_POWER_REQUEST_COLDERESET;
+			showVSH = VSH_CONFIRM_MENU;
+		}
+		else if ((selection == 11) && (pad & SCE_CTRL_CROSS))
+		{
+			selection = 0;
+			assignOperation = VSH_RESTART_VSH;
+			showVSH = VSH_CONFIRM_MENU;
+		}
+		else if (((selection == 12) && (pad & SCE_CTRL_CROSS)) || (pad & SCE_CTRL_CIRCLE))
 		{
 			selection = 0;
 			showVSH = 0;
@@ -569,6 +652,79 @@ SceInt Menu_HandleControls(SceUInt32 pad)
 				if (strlen(app_title[selection - 1]) != 0)
 					Utils_LaunchAppByUriExit(app_titleID[selection - 1]);
 			}		
+		}
+	}
+	else if (showVSH == VSH_SCREEN_FILTER_MENU)
+	{
+		if (pad & SCE_CTRL_DOWN)
+			selection++;
+		else if (pad & SCE_CTRL_UP)
+			selection--;
+
+		Utils_SetMax(&selection, 0, SCREEN_FILTER_MAX_ITEMS);
+		Utils_SetMin(&selection, SCREEN_FILTER_MAX_ITEMS, 0);
+
+		if (((selection == 0) && (pad & SCE_CTRL_CROSS)) || (pad & SCE_CTRL_CIRCLE))
+		{
+			selection = 0;
+			showVSH = VSH_MAIN_MENU;
+		}
+		else
+		{
+			switch(selection)
+			{
+				case 1:
+					if ((pad & SCE_CTRL_LEFT) || (pad & SCE_CTRL_RIGHT))
+					{
+						Menu_Config.screen_filter_keep_enabled = !Menu_Config.screen_filter_keep_enabled;
+					}
+					Config_SaveMenuConfig(Menu_Config);
+					break;
+				case 2:
+					if ((pad & SCE_CTRL_LEFT) && (Menu_Config.screen_filter_transparency > 0))
+					{
+						Menu_Config.screen_filter_transparency--;
+					}
+					else if ((pad & SCE_CTRL_RIGHT) && (Menu_Config.screen_filter_transparency < 255))
+					{
+						Menu_Config.screen_filter_transparency++;
+					}
+					Config_SaveMenuConfig(Menu_Config);
+					break;
+			}
+		}
+	}
+	else if (showVSH == VSH_CONFIRM_MENU)
+	{
+		if (pad & SCE_CTRL_DOWN)
+			selection++;
+		else if (pad & SCE_CTRL_UP)
+			selection--;
+
+		Utils_SetMax(&selection, 0, CONFIRM_MAX_ITEMS);
+		Utils_SetMin(&selection, CONFIRM_MAX_ITEMS, 0);
+
+		if (((selection == 0) && (pad & SCE_CTRL_CROSS)) || (pad & SCE_CTRL_CIRCLE) || assignOperation == 0)
+		{
+			selection = 0;
+			showVSH = VSH_MAIN_MENU;
+		}
+		else if ((selection == 1) && (pad & SCE_CTRL_CROSS))
+		{
+			selection = 0;
+			showVSH = 0;
+			switch(assignOperation)
+			{
+				case VSH_POWER_REQUEST_STANDBY:
+					scePowerRequestStandby();
+					break;
+				case VSH_POWER_REQUEST_COLDERESET:
+					scePowerRequestColdReset();
+					break;
+				case VSH_RESTART_VSH:
+					Utils_RestartVSH();
+					break;
+			}
 		}
 	}
 

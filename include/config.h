@@ -12,6 +12,8 @@ typedef struct
 	SceBool battery_keep_display;
 	SceBool fps_display;
 	SceBool fps_keep_display;
+	SceBool screen_filter_keep_enabled;
+	SceInt  screen_filter_transparency;
 	SceBool clock_display;
 	SceBool clock_keep_display;
 } Menu_Config_t;

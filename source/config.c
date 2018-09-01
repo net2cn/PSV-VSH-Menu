@@ -45,7 +45,7 @@ SceInt Config_SaveMenuConfig(Menu_Config_t Menu_Config)
 	
 	char *buf = (char *)Utils_SceMalloc(256);
 	SceInt len = snprintf(buf, 256, menuConfig, Menu_Config.battery_percent, Menu_Config.battery_lifetime, Menu_Config.battery_temp, 
-		Menu_Config.battery_keep_display, Menu_Config.colour, Menu_Config.fps_display, Menu_Config.fps_keep_display, Menu_Config.clock_display, Menu_Config.clock_keep_display);
+		Menu_Config.battery_keep_display, Menu_Config.colour, Menu_Config.fps_display, Menu_Config.fps_keep_display, Menu_Config.screen_filter_keep_enabled, Menu_Config.screen_filter_transparency, Menu_Config.clock_display, Menu_Config.clock_keep_display);
 	
 	if (R_FAILED(ret = FS_WriteFile(menu_config_path, buf, len)))
 	{
@@ -183,6 +183,8 @@ SceInt Config_LoadConfig(SceVoid)
 		Menu_Config.battery_keep_display = SCE_FALSE;
 		Menu_Config.fps_display = SCE_FALSE;
 		Menu_Config.fps_keep_display = SCE_FALSE;
+		Menu_Config.screen_filter_keep_enabled = SCE_FALSE;
+		Menu_Config.screen_filter_transparency = 127;		// dont get too dark.
 		Menu_Config.clock_display = SCE_FALSE;
 		Menu_Config.clock_keep_display = SCE_FALSE;
 		Config_SaveMenuConfig(Menu_Config);
@@ -196,7 +198,7 @@ SceInt Config_LoadConfig(SceVoid)
 	}
 
 	sscanf(buf, menuConfig, &Menu_Config.battery_percent, &Menu_Config.battery_lifetime, &Menu_Config.battery_temp, &Menu_Config.battery_keep_display, 
-		&Menu_Config.colour, &Menu_Config.fps_display, &Menu_Config.fps_keep_display, &Menu_Config.clock_display, &Menu_Config.clock_keep_display);
+		&Menu_Config.colour, &Menu_Config.fps_display, &Menu_Config.fps_keep_display, &Menu_Config.screen_filter_keep_enabled, &Menu_Config.screen_filter_transparency, &Menu_Config.clock_display, &Menu_Config.clock_keep_display);
 	memset(config_path, 0, 39);
 	memset(buf, 0, 256);
 

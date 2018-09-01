@@ -24,6 +24,7 @@ static SceUID tai_uid[HOOKS_NUM];
 static tai_hook_ref_t hook[HOOKS_NUM];
 
 SceInt showVSH = 0;
+SceInt assignOperation = 0;
 static SceBool isConfigSet = SCE_FALSE;
 static SceUInt64 timer = 0, tick = 0, t_tick = 0;
 
@@ -50,6 +51,11 @@ static SceVoid DisplayFPS(SceVoid)
 	}
 	
 	frames++;
+}
+
+static SceVoid DrawScrenFilter(SceInt transparency)
+{
+	drawRect(0, 0, 960, 544, RGBT(0, 0, 0, transparency));
 }
 
 SceInt sceDisplaySetFrameBuf_patched(const SceDisplayFrameBuf *pParam, SceDisplaySetBufSync sync) 
@@ -105,6 +111,9 @@ SceInt sceDisplaySetFrameBuf_patched(const SceDisplayFrameBuf *pParam, SceDispla
 
 	if ((Menu_Config.fps_keep_display && showVSH == 0))
 		DisplayFPS();
+	
+	if (Menu_Config.screen_filter_keep_enabled && showVSH == 0)
+		DrawScrenFilter(Menu_Config.screen_filter_transparency);
 
 	if (showVSH != 0)
 	{
