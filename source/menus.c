@@ -28,7 +28,7 @@ static SceInt refresh_rates[] = { 1, 5, 10, 20, 30, 45, 60 };
 static SceVoid Menu_DisplayMainMenu(SceVoid)
 {
 	drawSetColour(Menu_Config.colour == 9? Custom_Colour.title_text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.title_bg_col : RGB_GREEN);
-	drawStringCenter(100, "PSV VSH MENU");
+	drawStringCenter(100, "PSV VSH MENU MOD");
 		
 	drawSetColour(Menu_Config.colour == 9? Custom_Colour.text_col : WHITE, Menu_Config.colour == 9? Custom_Colour.bg_col : Config_GetVSHColour());
 		

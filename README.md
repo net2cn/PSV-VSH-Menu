@@ -12,7 +12,7 @@ Features
 - Quick launch with 5 slots. (Once the launcher.cfg file is generated in ur0:/data/vsh/launcher.cfg, feel free to change the title and title IDS to your preference. Keep in mind you can't use spaces for the title's name and you can't go above 5 (0-4) slots in the meantime.)
 - Quick Reboot/Shutdown/Suspend/Restart device in game.
 - FPS display.
-- Screen filter.
+- Screen filter. (Works for both 1000 and 2000 models)
 
 
 Installation
@@ -51,6 +51,9 @@ TITLE_TEXT_COL = Title font colour
 TEXT_COL = Font colour
 ```
 
+Known Issues
+--------------------------------------------------------------------------------
+- Screen filter will mysteriously half the framerate.
 
 Credits
 --------------------------------------------------------------------------------
