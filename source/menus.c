@@ -447,54 +447,54 @@ SceInt Menu_HandleControls(SceUInt32 pad)
 				Config_SaveMenuConfig(Menu_Config);
 			}
 		}
-		else if ((selection == 3) && (pad & SCE_CTRL_CROSS))
+		else if ((selection == 3) && (pad & SCE_CTRL_CIRCLE))
 		{
 			selection = 0;
 			showVSH = VSH_BATTERY_MENU;
 		}
-		else if ((selection == 4) && (pad & SCE_CTRL_CROSS))
+		else if ((selection == 4) && (pad & SCE_CTRL_CIRCLE))
 		{
 			selection = 0;
 			showVSH = VSH_ADVANCED_MENU;
 		}
-		else if ((selection == 5) && (pad & SCE_CTRL_CROSS))
+		else if ((selection == 5) && (pad & SCE_CTRL_CIRCLE))
 		{
 			selection = 0;
 			showVSH = VSH_FPS_MENU;
 		}
-		else if ((selection == 6) && (pad & SCE_CTRL_CROSS))
+		else if ((selection == 6) && (pad & SCE_CTRL_CIRCLE))
 		{
 			selection = 0;
 			showVSH = VSH_SCREEN_FILTER_MENU;
 		}
-		else if ((selection == 7) && (pad & SCE_CTRL_CROSS)) 
+		else if ((selection == 7) && (pad & SCE_CTRL_CIRCLE)) 
 		{
 			selection = 0;
 			showVSH = VSH_PROGRAM_MENU;
 		}
-		else if ((selection == 8) && (pad & SCE_CTRL_CROSS))
+		else if ((selection == 8) && (pad & SCE_CTRL_CIRCLE))
 		{
 			scePowerRequestSuspend();
 		}
-		else if ((selection == 9) && (pad & SCE_CTRL_CROSS))
+		else if ((selection == 9) && (pad & SCE_CTRL_CIRCLE))
 		{
 			selection = 0;
 			assignOperation = VSH_POWER_REQUEST_STANDBY;
 			showVSH = VSH_CONFIRM_MENU;
 		}
-		else if ((selection == 10) && (pad & SCE_CTRL_CROSS))
+		else if ((selection == 10) && (pad & SCE_CTRL_CIRCLE))
 		{
 			selection = 0;
 			assignOperation = VSH_POWER_REQUEST_COLDERESET;
 			showVSH = VSH_CONFIRM_MENU;
 		}
-		else if ((selection == 11) && (pad & SCE_CTRL_CROSS))
+		else if ((selection == 11) && (pad & SCE_CTRL_CIRCLE))
 		{
 			selection = 0;
 			assignOperation = VSH_RESTART_VSH;
 			showVSH = VSH_CONFIRM_MENU;
 		}
-		else if (((selection == 12) && (pad & SCE_CTRL_CROSS)) || (pad & SCE_CTRL_CIRCLE))
+		else if (((selection == 12) && (pad & SCE_CTRL_CIRCLE)) || (pad & SCE_CTRL_CROSS))
 		{
 			selection = 0;
 			showVSH = 0;
@@ -510,7 +510,7 @@ SceInt Menu_HandleControls(SceUInt32 pad)
 		Utils_SetMax(&selection, 0, BATTERY_MAX_ITEMS);
 		Utils_SetMin(&selection, BATTERY_MAX_ITEMS, 0);
 		
-		if (((selection == 0) && (pad & SCE_CTRL_CROSS)) || (pad & SCE_CTRL_CIRCLE))
+		if (((selection == 0) && (pad & SCE_CTRL_CIRCLE)) || (pad & SCE_CTRL_CROSS))
 		{
 			selection = 0;
 			showVSH = VSH_MAIN_MENU;
@@ -549,7 +549,7 @@ SceInt Menu_HandleControls(SceUInt32 pad)
 		Utils_SetMax(&selection, 0, ADVANCED_MAX_ITEMS);
 		Utils_SetMin(&selection, ADVANCED_MAX_ITEMS, 0);
 
-		if (((selection == 0) && (pad & SCE_CTRL_CROSS)) || (pad & SCE_CTRL_CIRCLE))
+		if (((selection == 0) && (pad & SCE_CTRL_CIRCLE)) || (pad & SCE_CTRL_CROSS))
 		{
 			selection = 0;
 			showVSH = VSH_MAIN_MENU;
@@ -603,7 +603,7 @@ SceInt Menu_HandleControls(SceUInt32 pad)
 		Utils_SetMax(&selection, 0, FPS_MAX_ITEMS);
 		Utils_SetMin(&selection, FPS_MAX_ITEMS, 0);
 
-		if (((selection == 0) && (pad & SCE_CTRL_CROSS)) || (pad & SCE_CTRL_CIRCLE))
+		if (((selection == 0) && (pad & SCE_CTRL_CIRCLE)) || (pad & SCE_CTRL_CROSS))
 		{
 			selection = 0;
 			showVSH = VSH_MAIN_MENU;
@@ -639,7 +639,7 @@ SceInt Menu_HandleControls(SceUInt32 pad)
 			
 		if (selection == 0)
 		{
-			if ((pad & SCE_CTRL_CROSS) || (pad & SCE_CTRL_CIRCLE))
+			if ((pad & SCE_CTRL_CIRCLE) || (pad & SCE_CTRL_CROSS))
 			{
 				selection = 0;
 				showVSH = VSH_MAIN_MENU;
@@ -647,7 +647,7 @@ SceInt Menu_HandleControls(SceUInt32 pad)
 		}
 		else
 		{
-			if (pad & SCE_CTRL_CROSS)
+			if (pad & SCE_CTRL_CIRCLE)
 			{
 				if (strlen(app_title[selection - 1]) != 0)
 					Utils_LaunchAppByUriExit(app_titleID[selection - 1]);
@@ -664,7 +664,7 @@ SceInt Menu_HandleControls(SceUInt32 pad)
 		Utils_SetMax(&selection, 0, SCREEN_FILTER_MAX_ITEMS);
 		Utils_SetMin(&selection, SCREEN_FILTER_MAX_ITEMS, 0);
 
-		if (((selection == 0) && (pad & SCE_CTRL_CROSS)) || (pad & SCE_CTRL_CIRCLE))
+		if (((selection == 0) && (pad & SCE_CTRL_CIRCLE)) || (pad & SCE_CTRL_CROSS))
 		{
 			selection = 0;
 			showVSH = VSH_MAIN_MENU;
@@ -704,12 +704,12 @@ SceInt Menu_HandleControls(SceUInt32 pad)
 		Utils_SetMax(&selection, 0, CONFIRM_MAX_ITEMS);
 		Utils_SetMin(&selection, CONFIRM_MAX_ITEMS, 0);
 
-		if (((selection == 0) && (pad & SCE_CTRL_CROSS)) || (pad & SCE_CTRL_CIRCLE) || assignOperation == 0)
+		if (((selection == 0) && (pad & SCE_CTRL_CIRCLE)) || (pad & SCE_CTRL_CROSS) || assignOperation == 0)
 		{
 			selection = 0;
 			showVSH = VSH_MAIN_MENU;
 		}
-		else if ((selection == 1) && (pad & SCE_CTRL_CROSS))
+		else if ((selection == 1) && (pad & SCE_CTRL_CIRCLE))
 		{
 			selection = 0;
 			showVSH = 0;
