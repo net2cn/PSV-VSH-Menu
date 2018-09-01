@@ -1,6 +1,7 @@
-# PSV-VSH-Menu ![Github latest downloads](https://img.shields.io/github/downloads/joel16/PSV-VSH-Menu/total.svg)
+# PSV-VSH-Menu-MOD-VER ![Github latest downloads](https://img.shields.io/github/downloads/joel16/PSV-VSH-Menu/total.svg)
 A VSH menu taiHEN plugin for the PS VITA games and homebrews. Currently does not work in SceShell.
 
+This is a modified version by net2cn which adds some new features.
 
 Features
 --------------------------------------------------------------------------------
@@ -11,6 +12,7 @@ Features
 - Quick launch with 5 slots. (Once the launcher.cfg file is generated in ur0:/data/vsh/launcher.cfg, feel free to change the title and title IDS to your preference. Keep in mind you can't use spaces for the title's name and you can't go above 5 (0-4) slots in the meantime.)
 - Quick Reboot/Shutdown/Suspend/Restart device in game.
 - FPS display.
+- Screen filter.
 
 
 Installation
