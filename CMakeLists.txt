@@ -11,7 +11,7 @@ endif()
 project(vsh)
 include("${VITASDK}/share/vita.cmake" REQUIRED)
 	
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wl,-q -Wall -O3 -std=gnu99")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DTAIPOOL_AS_STDLIB -g -Wall -O3 -std=gnu99")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fno-rtti -fno-exceptions")
 
 include_directories(
@@ -35,6 +35,7 @@ add_executable(${PROJECT_NAME}.elf
 	source/menus.c
 	source/power.c
 	source/utils.c
+	source/math_utils.c
 )
 
 target_link_libraries(${PROJECT_NAME}.elf
@@ -43,6 +44,7 @@ target_link_libraries(${PROJECT_NAME}.elf
 	SceDisplay_stub_weak
 	SceLibKernel_stub_weak
 	ScePower_stub_weak
+	SceGxm_stub_weak
 	SceSysmem_stub_weak
 	kuio_stub_weak
 	k

@@ -53,10 +53,10 @@ TEXT_COL = Font colour
 
 Known Issues
 --------------------------------------------------------------------------------
-- Screen filter will mysteriously half the framerate.
+- None.
 
 Credits
 --------------------------------------------------------------------------------
 
-- Rinnegatamante for kuio and FPS code.
+- Rinnegatamante for kuio, FPS and vFlux code.
 - frangarcj for oclockvita

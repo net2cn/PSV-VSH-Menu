@@ -685,7 +685,7 @@ SceInt Menu_HandleControls(SceUInt32 pad)
 					{
 						Menu_Config.screen_filter_transparency--;
 					}
-					else if ((pad & SCE_CTRL_RIGHT) && (Menu_Config.screen_filter_transparency < 255))
+					else if ((pad & SCE_CTRL_RIGHT) && (Menu_Config.screen_filter_transparency < 15))
 					{
 						Menu_Config.screen_filter_transparency++;
 					}

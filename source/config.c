@@ -184,7 +184,7 @@ SceInt Config_LoadConfig(SceVoid)
 		Menu_Config.fps_display = SCE_FALSE;
 		Menu_Config.fps_keep_display = SCE_FALSE;
 		Menu_Config.screen_filter_keep_enabled = SCE_FALSE;
-		Menu_Config.screen_filter_transparency = 127;		// dont get too dark.
+		Menu_Config.screen_filter_transparency = 2;		// dont get too dark.
 		Menu_Config.clock_display = SCE_FALSE;
 		Menu_Config.clock_keep_display = SCE_FALSE;
 		Config_SaveMenuConfig(Menu_Config);
