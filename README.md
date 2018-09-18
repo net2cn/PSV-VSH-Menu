@@ -53,7 +53,7 @@ TEXT_COL = Font colour
 
 Known Issues
 --------------------------------------------------------------------------------
-- None.
+- Games like Super Danganronpa 2 will not be able to talk to NPC unless you turn off the screen filter.
 
 Credits
 --------------------------------------------------------------------------------
